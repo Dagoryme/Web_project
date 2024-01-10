@@ -2,8 +2,6 @@ events { worker_connections 1024;
 }
 
 http {
-    resolver 172.18.0.4:80 valid=30s;
-    resolver 172.18.0.3:80 valid=30s;
     sendfile on;
 
     server {
