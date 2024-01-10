@@ -1,0 +1,26 @@
+/* VerticalSlider.css */
+
+.slider-container {
+    position: absolute;
+    top: 50%;
+    height : 50vh;
+    right: 1%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1; /* Valeur de z-index pour le menu */
+    color: black;
+  }
+  
+  .slider-input {
+    transform: rotate(270deg);
+    height : 100%;
+    width: 150px;
+  }
+  
+  .slider-label {
+    display: block;
+    text-align: center;
+    margin-top: auto;
+  }

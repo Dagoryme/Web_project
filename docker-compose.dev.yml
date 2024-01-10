@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  client:
+    image: clien-dev-image
+    build: 
+      dockerfile: Dockerfile.dev
+    container_name: client-dev-c 
+    volumes:
+      - ./client:/client
+      - node_modules:/client/node_modules/
+    ports: 
+      - "8090:80"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - api
+    networks : 
+      - monnetwork
+
+  api:
+    container_name: api
+    build: 
+      context: ./api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3001"
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./api/src:/app/src
+    depends_on:
+      - postgres
+    networks : 
+      - monnetwork
+
+  postgres:
+    container_name: bdd-postgres
+    image: postgres
+    environment:
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  front:
+    container_name: "front"
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes : 
+      - ./client:/app
+    depends_on:
+      - api
+    ports:
+      - "8091:80"
+    networks : 
+      - monnetwork
+
+  reverse-proxy:
+    restart: always
+    container_name: reverse-proxy
+    build:
+      context: ./reverse-proxy
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - api
+      - front
+    volumes:
+      - ./reverse-proxy/log:/var/log/nginx
+    ports:
+      - "80:80"
+    networks : 
+      - monnetwork
+
+volumes:
+  node_modules:
+  postgres_data:
+
+networks : 
+    monnetwork:
+

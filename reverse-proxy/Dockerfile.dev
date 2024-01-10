@@ -1,0 +1,3 @@
+FROM nginx
+
+COPY nginx.conf.dev /etc/nginx/nginx.conf

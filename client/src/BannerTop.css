@@ -1,0 +1,24 @@
+/* Banner.css */
+.banner {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #2196f3; /* Couleur de fond du bandeau */
+  }
+  
+  .login-button,
+  .signup-button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    color: #fff; /* Couleur du texte des boutons */
+    background-color: #4caf50; /* Couleur de fond des boutons */
+  }
+  
+  .signup-button {
+    background-color: #2196f3; /* Changer la couleur de fond pour le bouton Sign Up */
+  }
+  

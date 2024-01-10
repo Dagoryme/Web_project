@@ -1,0 +1,60 @@
+/* DropdownMenu.css */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu {
+  position: relative;
+}
+
+.logo {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px; /* Marge autour du logo */
+  z-index: 2; /* Valeur de z-index pour le logo */
+}
+
+.logo.hidden {
+  display: none;
+}
+
+.menu-items {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1; /* Valeur de z-index pour le menu */
+}
+
+.menu-items a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 8px;
+}
+
+.menu-items a:hover {
+  background-color: #f0f0f0;
+}
+
+.menu-items.active {
+  display: block;
+}
+
+.form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  z-index: 2;
+}
