@@ -9,22 +9,16 @@ services:
     volumes:
       - ./client:/client
       - node_modules:/client/node_modules/
-    ports: 
-      - "8090:80"
     environment:
       - NODE_ENV=development
     depends_on:
       - api
-    networks : 
-      - monnetwork
 
   api:
-    container_name: api
+    container_name: "api"
     build: 
       context: ./api
       dockerfile: Dockerfile.dev
-    ports:
-      - "3001:3001"
     environment:
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
@@ -35,8 +29,6 @@ services:
       - ./api/src:/app/src
     depends_on:
       - postgres
-    networks : 
-      - monnetwork
 
   postgres:
     container_name: bdd-postgres
@@ -57,10 +49,6 @@ services:
       - ./client:/app
     depends_on:
       - api
-    ports:
-      - "8091:80"
-    networks : 
-      - monnetwork
 
   reverse-proxy:
     restart: always
@@ -75,13 +63,8 @@ services:
       - ./reverse-proxy/log:/var/log/nginx
     ports:
       - "80:80"
-    networks : 
-      - monnetwork
 
 volumes:
   node_modules:
   postgres_data:
-
-networks : 
-    monnetwork:
 
