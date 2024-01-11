@@ -13,6 +13,8 @@ services:
       - NODE_ENV=development
     depends_on:
       - api
+    networks: 
+      - monetnwork
 
   api:
     container_name: "api"
@@ -29,6 +31,8 @@ services:
       - ./api/src:/app/src
     depends_on:
       - postgres
+    networks: 
+      - monetnwork
 
   postgres:
     container_name: bdd-postgres
@@ -49,6 +53,8 @@ services:
       - ./client:/app
     depends_on:
       - api
+    networks: 
+      - monetnwork
 
   reverse-proxy:
     restart: always
@@ -63,8 +69,12 @@ services:
       - ./reverse-proxy/log:/var/log/nginx
     ports:
       - "80:80"
+    networks: 
+      - monetnwork
 
 volumes:
   node_modules:
   postgres_data:
 
+networks: 
+  monetnwork:
